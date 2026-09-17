@@ -12,12 +12,12 @@ Senior Backend Software Engineer with 3.5+ years of experience engineering high-
 
 ### 1. [Workflow Orchestration Engine](https://github.com/kuhaad-dev/workflow-engine)
 - **Stack:** NestJS 11, TypeORM, MySQL, Redis, BullMQ, Docker
-- **Highlights:** Configurable Finite State Machine (FSM), strict state transition guards, row-level pessimistic locking (`SELECT ... FOR UPDATE`), cron-driven SLA escalation worker, 15k bulk ingestion pipeline.
+- **Highlights:** Configurable Finite State Machine (FSM), strict state transition guards, row-level pessimistic locking (`SELECT ... FOR UPDATE`), cron-driven SLA escalation worker, high-throughput bulk ingestion pipeline.
 - **Verification:** Concurrency E2E suite verifying 20 simultaneous writes serialize with 1 success and 19 conflicts.
 
 ### 2. [Event-Driven Real-Time Notification Service](https://github.com/kuhaad-dev/realtime-notifications)
 - **Stack:** NestJS 11, PostgreSQL 16, Redis 7, Socket.IO with Redis Streams adapter, BullMQ
-- **Highlights:** Timing-safe HMAC-SHA256 signature verification (`crypto.timingSafeEqual`), Redis atomic idempotency deduplication (`SETNX`), horizontal WebSocket broadcasting, interactive test console at `/console`.
+- **Highlights:** Timing-safe HMAC-SHA256 signature verification (`crypto.timingSafeEqual`), Redis atomic idempotency deduplication (`SETNX`), horizontal WebSocket broadcasting, interactive test console.
 
 ### 3. [Production NestJS Platform on GCP](https://github.com/kuhaad-dev/nestjs-platform)
 - **Stack:** GKE, Terraform (IaC), Workload Identity Federation (OIDC), Docker Multi-Stage, Prometheus RED Method

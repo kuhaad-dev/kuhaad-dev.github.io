@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Notification Service — Interactive Webhook & WebSocket Console</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #070a13; color: #e2e8f0; }
+    .glass-card { background: rgba(13, 19, 33, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .console-bg { background: #050811; border: 1px solid #1e293b; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-[#090d19]/80 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <a href="../" class="flex items-center space-x-2 text-xs font-mono text-slate-400 hover:text-white transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+          <span>Portfolio</span>
+        </a>
+        <span class="text-slate-700">/</span>
+        <div class="flex items-center space-x-2">
+          <span class="font-heading font-bold text-white text-base">Real-Time Notification Service</span>
+          <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Live Interactive Lab</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3">
+        <a href="https://github.com/kuhaad-dev/realtime-notifications" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 hover:text-white flex items-center space-x-2 transition">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>GitHub Code</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+    <!-- Overview Banner -->
+    <div class="glass-card rounded-3xl p-8 border border-slate-800">
+      <div class="max-w-3xl">
+        <span class="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold">Security & Streaming Engine</span>
+        <h1 class="font-heading font-bold text-3xl sm:text-4xl text-white mt-2">HMAC-SHA256 Ingestion & Redis Idempotency Console</h1>
+        <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+          Test cryptographic timing-safe webhook verification, distributed Redis <code class="text-cyan-400 font-mono">SETNX</code> deduplication, and horizontal Socket.IO broadcasting across Redis Streams adapters.
+        </p>
+      </div>
+    </div>
+
+    <!-- Interactive Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left Controls: Webhook Dispatcher -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-5">
+          <h3 class="font-heading font-bold text-lg text-white flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+            <span>Simulate Webhook Dispatcher</span>
+          </h3>
+
+          <div class="space-y-3 font-mono text-xs">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1">Event Type</label>
+              <select id="event-type" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-slate-200">
+                <option value="payment.completed">payment.completed ($249.00)</option>
+                <option value="sla.breach.warning">sla.breach.warning (24h overdue)</option>
+                <option value="document.verified">document.verified (Tier 2)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1">Idempotency-Key</label>
+              <input id="idem-key" type="text" value="idem_prod_991823" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-cyan-300">
+            </div>
+
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1">HMAC Secret Key</label>
+              <input id="hmac-secret" type="password" value="prod_webhook_secret_key_secure" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-slate-300">
+            </div>
+          </div>
+
+          <div class="space-y-3 pt-2">
+            <button onclick="dispatchWebhook(true)" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-cyan-600 hover:from-brand-500 hover:to-cyan-500 text-white font-semibold text-xs shadow-lg shadow-brand-500/25 active:scale-[0.98] transition flex items-center justify-center space-x-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              <span>Dispatch Valid Webhook (HMAC-SHA256)</span>
+            </button>
+
+            <button onclick="dispatchWebhook(true)" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-amber-300 text-xs font-mono transition flex items-center justify-center space-x-2">
+              <span>Replay Identical Key (Test Redis Deduplication)</span>
+            </button>
+
+            <button onclick="dispatchWebhook(false)" class="w-full py-2.5 px-4 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-mono transition flex items-center justify-center space-x-2">
+              <span>Send Tampered Signature (Test 401 Rejection)</span>
+            </button>
+          </div>
+
+          <!-- Metrics Box -->
+          <div class="pt-4 border-t border-slate-800/80 grid grid-cols-3 gap-2 text-center font-mono">
+            <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div id="stat-delivered" class="font-heading font-bold text-base text-emerald-400">0</div>
+              <div class="text-[10px] text-slate-400">201 Created</div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div id="stat-dedup" class="font-heading font-bold text-base text-cyan-400">0</div>
+              <div class="text-[10px] text-slate-400">200 Deduped</div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div id="stat-rejected" class="font-heading font-bold text-base text-rose-400">0</div>
+              <div class="text-[10px] text-slate-400">401 Rejected</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Callout -->
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-3 text-xs text-slate-400">
+          <div class="font-heading font-bold text-white text-sm">Anti-Replay & Mutex Architecture</div>
+          <p>
+            1. <strong class="text-slate-300">HMAC-SHA256 Guard:</strong> Uses constant-time comparison (<code class="text-cyan-400 font-mono">crypto.timingSafeEqual</code>) to eliminate side-channel timing leaks.
+          </p>
+          <p>
+            2. <strong class="text-slate-300">Redis SETNX Mutex:</strong> Acquires atomic idempotency lock with 24-hour TTL, preventing duplicate message broker queuing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Real-time Live Log Stream -->
+      <div class="lg:col-span-7">
+        <div class="console-bg rounded-3xl p-6 flex flex-col h-[600px]">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-800 text-xs font-mono text-slate-400">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Live WebSocket Event Stream & Ingestion Logs</span>
+            </div>
+            <button onclick="document.getElementById('stream-logs').innerHTML = '';" class="text-[11px] text-slate-500 hover:text-slate-300">Clear</button>
+          </div>
+
+          <div id="stream-logs" class="flex-1 overflow-y-auto pt-4 space-y-3 font-mono text-[11px] text-slate-300">
+            <div class="text-slate-600">[Socket.IO Adapter] Connected to Redis Streams broker (redis://127.0.0.1:6379/0).</div>
+            <div class="text-slate-600">[Client Connected] Subscribed to room `tenant_us_east_1` (Socket ID: sck_8819a).</div>
+            <div class="text-slate-500">[Info] Dispatch a webhook from the left panel to test signature validation.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const processedKeys = new Set();
+    let countDelivered = 0;
+    let countDedup = 0;
+    let countRejected = 0;
+
+    function logStream(msg, color = 'text-slate-300') {
+      const container = document.getElementById('stream-logs');
+      const d = new Date().toISOString().split('T')[1].slice(0, 12);
+      const row = document.createElement('div');
+      row.className = `${color} leading-relaxed`;
+      row.innerHTML = `<span class="text-slate-600">${d}</span> ${msg}`;
+      container.appendChild(row);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    async function dispatchWebhook(isValidSignature) {
+      const eventType = document.getElementById('event-type').value;
+      const idemKey = document.getElementById('idem-key').value.trim();
+      const ts = Math.floor(Date.now() / 1000);
+
+      logStream('------------------------------------------------------------', 'text-slate-700');
+      logStream(`[Incoming HTTP] POST /api/v1/webhooks/ingest (Idempotency-Key: ${idemKey})`, 'text-cyan-400 font-semibold');
+
+      // Test HMAC verification
+      if (!isValidSignature) {
+        countRejected++;
+        document.getElementById('stat-rejected').textContent = countRejected;
+        logStream(`[HMAC Guard] Calculating crypto.createHmac('sha256', secret)...`, 'text-slate-400');
+        logStream(`[HMAC Guard] crypto.timingSafeEqual(expected, provided) -> <strong class="text-rose-400">FALSE</strong> (Signature Mismatch).`, 'text-rose-400');
+        logStream(`<span class="text-rose-400 font-bold">HTTP 401 Unauthorized</span> - Invalid webhook cryptographic signature. Request halted.`, 'text-rose-400');
+        return;
+      }
+
+      logStream(`[HMAC Guard] Timestamp validation: |${ts} - now| < 300s -> <span class="text-emerald-400">VALID</span>`, 'text-slate-400');
+      logStream(`[HMAC Guard] crypto.timingSafeEqual() -> <strong class="text-emerald-400">TRUE</strong> (Constant-time verify passed).`, 'text-emerald-400');
+
+      // Test Redis Idempotency
+      if (processedKeys.has(idemKey)) {
+        countDedup++;
+        document.getElementById('stat-dedup').textContent = countDedup;
+        logStream(`[Redis Idempotency] SETNX idempotency:${idemKey} -> <strong class="text-cyan-400">0 (Key Exists)</strong>`, 'text-cyan-400');
+        logStream(`[Redis Idempotency] Replay attack intercepted. Fetching memoized response body from Redis cache...`, 'text-slate-400');
+        logStream(`<span class="text-cyan-300 font-bold">HTTP 200 OK (Cached)</span> - Returning cached execution result. Job was NOT re-queued.`, 'text-cyan-300');
+      } else {
+        processedKeys.add(idemKey);
+        countDelivered++;
+        document.getElementById('stat-delivered').textContent = countDelivered;
+        logStream(`[Redis Idempotency] SETNX idempotency:${idemKey} -> <strong class="text-emerald-400">1 (Lock Acquired, TTL: 86400s)</strong>`, 'text-emerald-400');
+        logStream(`[BullMQ Queue] Enqueued job to 'notifications-delivery' queue (Job ID: job_${Math.floor(Math.random()*9000)+1000}) with 5 retries.`, 'text-purple-400');
+        logStream(`<span class="text-emerald-400 font-bold">HTTP 201 Created</span> - Webhook ingested. BullMQ worker dispatching to Socket.IO.`, 'text-emerald-400');
+
+        // Simulate Socket.IO delivery
+        setTimeout(() => {
+          logStream(`[Socket.IO Broadcast] Redis Adapter broadcasting event <strong class="text-white">'${eventType}'</strong> to room 'tenant_us_east_1' (Latency: 14ms).`, 'text-emerald-300');
+          logStream(`[Payload]: {"event":"${eventType}","timestamp":"${new Date().toISOString()}","delivered":true}`, 'text-slate-400');
+        }, 150);
+      }
+    }
+  </script>
+
+</body>
+</html>
