@@ -101,11 +101,12 @@
       </a>
 
       <!-- Desktop Nav Links -->
-      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+      <div class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-300">
         <a href="#projects" class="hover:text-white transition">Featured Projects</a>
         <a href="#architecture" class="hover:text-white transition">System Design</a>
         <a href="#experience" class="hover:text-white transition">Experience</a>
         <a href="#skills" class="hover:text-white transition">Tech Stack</a>
+        <a href="#education" class="hover:text-white transition">Education & Certs</a>
         <a href="#contact" class="hover:text-white transition">Contact</a>
       </div>
 
@@ -133,6 +134,7 @@
       <a href="#architecture" class="block py-2 hover:text-brand-400 transition">System Design</a>
       <a href="#experience" class="block py-2 hover:text-brand-400 transition">Experience</a>
       <a href="#skills" class="block py-2 hover:text-brand-400 transition">Tech Stack</a>
+      <a href="#education" class="block py-2 hover:text-brand-400 transition">Education & Certs</a>
       <a href="#contact" class="block py-2 hover:text-brand-400 transition">Contact</a>
       <div class="pt-2 flex items-center space-x-2 text-xs font-mono text-emerald-400">
         <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -661,15 +663,64 @@
 
       </div>
 
-      <!-- Education Section -->
-      <div class="mt-12 glass-card rounded-2xl p-6 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Education</span>
-          <div class="font-heading font-bold text-base text-white mt-1">B.Sc. (Hons) Physics — Ramjas College, University of Delhi (2014 – 2017)</div>
-          <div class="text-xs text-slate-400 mt-0.5">Full Stack Software Engineering Specialization — The 10X Academy (2022)</div>
+      <!-- Education & Certifications Section -->
+      <div id="education" class="mt-14 pt-10 border-t border-slate-800/80 scroll-mt-24">
+        <div class="max-w-2xl mb-8">
+          <span class="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">Credentials & Background</span>
+          <h3 class="font-heading font-bold text-2xl text-white mt-1">Education & Professional Certifications</h3>
         </div>
-        <div class="text-xs font-mono text-slate-500">
-          Delhi NCR, India
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Certification: The 10X Academy -->
+          <div class="glass-card rounded-2xl p-7 border border-slate-800/80 relative overflow-hidden group hover:border-amber-500/30 transition">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md text-[11px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-3">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                  <span>Professional Certification</span>
+                </div>
+                <h4 class="font-heading font-bold text-lg text-white">Full Stack Software Engineering</h4>
+                <div class="text-sm font-semibold text-amber-300 mt-1">The 10X Academy</div>
+              </div>
+              <span class="text-xs font-mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded">2022</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-400 leading-relaxed">
+              Intensive, outcome-driven computer science program focused on Advanced Data Structures & Algorithms (DSA), System Design, MERN/Full-Stack architectures, scalable RESTful APIs, and relational databases.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-800/60 flex flex-wrap gap-1.5 font-mono text-[11px] text-slate-400">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Algorithms & DSA</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">System Design</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Node.js & React</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">PostgreSQL</span>
+            </div>
+          </div>
+
+          <!-- Academic Degree: Ramjas College -->
+          <div class="glass-card rounded-2xl p-7 border border-slate-800/80 relative overflow-hidden group hover:border-brand-500/30 transition">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/5 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md text-[11px] font-mono bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-3">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+                  <span>Bachelor's Degree</span>
+                </div>
+                <h4 class="font-heading font-bold text-lg text-white">B.Sc. (Hons) Physics</h4>
+                <div class="text-sm font-semibold text-indigo-300 mt-1">Ramjas College, University of Delhi</div>
+              </div>
+              <span class="text-xs font-mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded">2014 – 2017</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-400 leading-relaxed">
+              Rigorous foundation in analytical modeling, computational physics, differential equations, and mathematical problem-solving methodologies applied to software engineering.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-800/60 flex flex-wrap gap-1.5 font-mono text-[11px] text-slate-400">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Mathematical Modeling</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Analytical Computation</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Delhi, India</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
