@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayank Kuhaad — Backend Software Engineer | Distributed Systems & High-Concurrency APIs</title>
+  <meta name="description" content="Senior Backend Software Engineer specializing in NestJS, TypeScript, PostgreSQL, MySQL, Redis, and Cloud Infrastructure (GCP/AWS). Proven track record in FSM workflow engines, pessimistic row-level locking, and event-driven architectures.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+            },
+            accent: {
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              violet: '#8b5cf6',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #070a12;
+      color: #e2e8f0;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.06) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+    
+    .glass-card {
+      background: rgba(13, 19, 33, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.15);
+    }
+
+    .glow-badge {
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .code-editor {
+      background: #060911;
+      border: 1px solid #1e293b;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #070a12; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+  </style>
+</head>
+<body class="selection:bg-brand-500 selection:text-white">
+
+  <!-- Top Navbar -->
+  <nav class="sticky top-0 z-50 bg-[#070a12]/80 backdrop-blur-xl border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-500 to-cyan-400 p-[1.5px] shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-[#090d18] rounded-[10px] flex items-center justify-center font-heading font-bold text-white text-base">
+            MK
+          </div>
+        </div>
+        <div>
+          <span class="font-heading font-bold text-lg tracking-tight text-white group-hover:text-brand-400 transition">Mayank Kuhaad</span>
+          <span class="block text-[11px] font-mono text-slate-400">Backend Software Engineer</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#projects" class="hover:text-white transition">Featured Projects</a>
+        <a href="#architecture" class="hover:text-white transition">System Design</a>
+        <a href="#experience" class="hover:text-white transition">Experience</a>
+        <a href="#skills" class="hover:text-white transition">Tech Stack</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 glow-badge">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Open to Worldwide Remote</span>
+        </div>
+        
+        <a href="https://github.com/kuhaad-dev" target="_blank" class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+
+        <!-- Mobile menu toggle -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white" aria-label="Toggle Navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 bg-[#090d18] border-b border-slate-800 space-y-3 font-medium text-sm text-slate-300">
+      <a href="#projects" class="block py-2 hover:text-brand-400 transition">Featured Projects</a>
+      <a href="#architecture" class="block py-2 hover:text-brand-400 transition">System Design</a>
+      <a href="#experience" class="block py-2 hover:text-brand-400 transition">Experience</a>
+      <a href="#skills" class="block py-2 hover:text-brand-400 transition">Tech Stack</a>
+      <a href="#contact" class="block py-2 hover:text-brand-400 transition">Contact</a>
+      <div class="pt-2 flex items-center space-x-2 text-xs font-mono text-emerald-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Open to Worldwide Remote Roles</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-4xl">
+        <!-- Status Pill -->
+        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-mono bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-400"></span>
+          <span>Distributed Systems & High-Concurrency APIs</span>
+        </div>
+
+        <h1 class="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1]">
+          Architecting resilient, <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-indigo-300 to-cyan-400">fault-tolerant</span> backend systems.
+        </h1>
+
+        <p class="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed font-sans font-normal">
+          Backend Software Engineer with <strong class="text-white font-semibold">3.5+ years of experience</strong> engineering event-driven workflows, transactional concurrency safety with pessimistic locking in MySQL/PostgreSQL, and zero-downtime Kubernetes platforms.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+          <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-cyan-600 hover:from-brand-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-brand-500/25 active:scale-[0.98] transition flex items-center space-x-2">
+            <span>Explore Engineering Projects</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+
+          <a href="mailto:mayankkuhaad@gmail.com" class="px-6 py-3.5 rounded-xl glass-card text-slate-200 hover:text-white hover:bg-slate-800/60 font-semibold text-sm active:scale-[0.98] transition flex items-center space-x-2">
+            <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span>Get in Touch</span>
+          </a>
+
+          <a href="https://linkedin.com/in/mayank-kuhaad" target="_blank" class="px-4 py-3.5 rounded-xl glass-card text-slate-400 hover:text-white transition" aria-label="LinkedIn">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.738-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="mt-14 pt-10 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div>
+            <div class="font-heading font-bold text-3xl text-white">3.5+</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">Years Production Backend</div>
+          </div>
+          <div>
+            <div class="font-heading font-bold text-3xl text-cyan-400">15,000+</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">Hierarchical Bulk Records</div>
+          </div>
+          <div>
+            <div class="font-heading font-bold text-3xl text-emerald-400">5,000+</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">Concurrent WebSockets</div>
+          </div>
+          <div>
+            <div class="font-heading font-bold text-3xl text-brand-400">&lt; 5 mins</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">GKE CI/CD Deploy Time</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Core Architecture Pillars -->
+  <section id="architecture" class="py-20 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl">
+        <span class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold">Specialized Expertise</span>
+        <h2 class="font-heading font-bold text-3xl sm:text-4xl text-white mt-2">Enterprise Architectural Patterns</h2>
+        <p class="text-slate-400 text-sm mt-3">Production-hardened design principles engineered to eliminate distributed race conditions, packet loss, and deployment downtime.</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Pillar 1 -->
+        <div class="glass-card rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-5">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-white">Concurrency & Row-Level Locks</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mt-2.5">
+              Strict serialization using <code class="font-mono text-cyan-400">SELECT ... FOR UPDATE</code> in <code class="font-mono text-cyan-400">READ COMMITTED</code> transactions. Guarantees race-condition immunity during concurrent approvals.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800/80 font-mono text-[11px] text-slate-500">
+            FSM Transition Guards • Mutex Locks
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="glass-card rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-5">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-white">Event Streams & Idempotency</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mt-2.5">
+              Cryptographic HMAC-SHA256 signature verification with constant-time byte comparisons and distributed Redis <code class="font-mono text-cyan-400">SETNX</code> deduplication keys to stop duplicate webhooks.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800/80 font-mono text-[11px] text-slate-500">
+            BullMQ Queues • Timing-Safe HMAC
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="glass-card rounded-2xl p-7 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-white">Cloud Infrastructure & RED Method</h3>
+            <p class="text-slate-400 text-xs leading-relaxed mt-2.5">
+              Terraform-provisioned VPCs and GKE clusters with keyless OIDC authentication (Workload Identity Federation) and Prometheus RED method observability dashboards.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800/80 font-mono text-[11px] text-slate-500">
+            Kubernetes HPA • Prometheus RED Metrics
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Featured Projects (The Big 3) -->
+  <section id="projects" class="py-20 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold">Production Repositories</span>
+          <h2 class="font-heading font-bold text-3xl sm:text-4xl text-white mt-2">Featured Engineering Projects</h2>
+          <p class="text-slate-400 text-sm mt-3">Full-stack backend architectures matching real-world enterprise requirements.</p>
+        </div>
+        <a href="https://github.com/kuhaad-dev" target="_blank" class="mt-4 md:mt-0 inline-flex items-center space-x-2 text-xs font-mono text-brand-400 hover:text-brand-300 transition">
+          <span>View GitHub Profile</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+
+      <div class="space-y-12">
+        
+        <!-- Project 1: Workflow Orchestration Engine -->
+        <div class="glass-card rounded-3xl p-8 lg:p-10 border border-slate-800 transition hover:border-slate-700">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7 space-y-5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-brand-500/10 text-brand-400 border border-brand-500/20">NestJS 11</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">TypeORM & MySQL</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">Redis & BullMQ</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-slate-800 text-slate-300">Docker</span>
+              </div>
+
+              <h3 class="font-heading font-bold text-2xl sm:text-3xl text-white">Workflow Orchestration Engine</h3>
+
+              <p class="text-slate-300 text-sm leading-relaxed">
+                A multi-tenant workflow engine managing document verification lifecycles across dynamic geographic zones. Engineered with a configurable <strong>Finite State Machine (FSM)</strong>, strict transition guards, and row-level <strong>pessimistic locking (<code class="font-mono text-cyan-400">SELECT ... FOR UPDATE</code>)</strong> in MySQL to prevent race conditions during high-volume concurrent approvals.
+              </p>
+
+              <div class="space-y-2 text-xs text-slate-400 font-sans">
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Concurrency Safety:</strong> E2E integration test proving 20 simultaneous approval writes serialize cleanly with exactly 1 success and 19 conflict responses.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Cron-Driven SLA Escalation:</strong> Automated background worker scanning stalled workflows and auto-escalating across jurisdictional tiers.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Chunked Bulk Ingestion:</strong> Ingests 15,000+ tabular records partitioned into 500-item chunks with idempotent upserts.</span>
+                </div>
+              </div>
+
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <a href="https://github.com/kuhaad-dev/workflow-engine" target="_blank" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs shadow-lg shadow-brand-500/20 flex items-center space-x-2 transition">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span>View on GitHub (5-Day Commit History)</span>
+                </a>
+                <span class="text-xs font-mono text-slate-500">MIT Licensed</span>
+              </div>
+            </div>
+
+            <!-- Code/Terminal Preview -->
+            <div class="lg:col-span-5 code-editor rounded-2xl p-5 font-mono text-xs text-slate-300 shadow-2xl">
+              <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-[11px] text-slate-500">
+                <span>workflow-orchestrator.service.ts</span>
+                <span class="text-emerald-400">PESSIMISTIC_WRITE</span>
+              </div>
+              <pre class="overflow-x-auto text-[11px] leading-relaxed"><span class="text-purple-400">const</span> instance = <span class="text-purple-400">await</span> manager
+  .getRepository(WorkflowInstance)
+  .createQueryBuilder(<span class="text-emerald-300">'instance'</span>)
+  .<span class="text-cyan-400">setLock</span>(<span class="text-emerald-300">'pessimistic_write'</span>)
+  .where(<span class="text-emerald-300">'instance.id = :id'</span>, { id })
+  .getOne();
+
+<span class="text-slate-500">// Serializes 20 concurrent approvals</span>
+<span class="text-purple-400">if</span> (instance.isCompleted) {
+  <span class="text-purple-400">throw new</span> <span class="text-amber-300">ConflictException</span>(
+    <span class="text-emerald-300">'State already completed'</span>
+  );
+}</pre>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Project 2: Event-Driven Real-Time Notification Service -->
+        <div class="glass-card rounded-3xl p-8 lg:p-10 border border-slate-800 transition hover:border-slate-700">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7 space-y-5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-brand-500/10 text-brand-400 border border-brand-500/20">NestJS 11</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">PostgreSQL 16</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Socket.IO & Redis Adapter</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">BullMQ</span>
+              </div>
+
+              <h3 class="font-heading font-bold text-2xl sm:text-3xl text-white">Event-Driven Real-Time Notification Service</h3>
+
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Scalable real-time notification engine with <strong>timing-safe HMAC-SHA256 webhook signature verification</strong> and <strong>atomic Redis idempotency deduplication (<code class="font-mono text-cyan-400">SETNX</code>)</strong>. Drives asynchronous delivery via BullMQ with exponential backoff and Socket.IO horizontal broadcasting across multi-instance Node clusters via the Redis Streams adapter.
+              </p>
+
+              <div class="space-y-2 text-xs text-slate-400 font-sans">
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>HMAC Verification:</strong> Constant-time buffer comparison (<code class="font-mono text-cyan-400">crypto.timingSafeEqual</code>) and 300s timestamp tolerance window to defeat replay attacks.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Distributed Idempotency:</strong> Interceptor preventing duplicate webhook ingestion and memoizing successful response bodies.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Horizontal Scalability:</strong> Redis adapter distributing WebSocket room broadcasts across separate server processes without packet loss.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Interactive Testing Console:</strong> Embedded live dashboard at <code class="font-mono text-cyan-400">/console</code> for real-time WebSocket monitoring.</span>
+                </div>
+              </div>
+
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <a href="https://github.com/kuhaad-dev/realtime-notifications" target="_blank" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs shadow-lg shadow-brand-500/20 flex items-center space-x-2 transition">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span>View on GitHub (12 Commits)</span>
+                </a>
+                <span class="text-xs font-mono text-slate-500">Includes render.yaml</span>
+              </div>
+            </div>
+
+            <!-- Code/Terminal Preview -->
+            <div class="lg:col-span-5 code-editor rounded-2xl p-5 font-mono text-xs text-slate-300 shadow-2xl">
+              <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-[11px] text-slate-500">
+                <span>hmac-signature.guard.ts</span>
+                <span class="text-cyan-400">TIMING_SAFE</span>
+              </div>
+              <pre class="overflow-x-auto text-[11px] leading-relaxed"><span class="text-purple-400">const</span> expected = crypto
+  .createHmac(<span class="text-emerald-300">'sha256'</span>, secret)
+  .update(payload)
+  .digest(<span class="text-emerald-300">'hex'</span>);
+
+<span class="text-slate-500">// Mitigates byte-timing side channel attack</span>
+<span class="text-purple-400">const</span> isValid = crypto.<span class="text-cyan-400">timingSafeEqual</span>(
+  Buffer.from(expected, <span class="text-emerald-300">'hex'</span>),
+  Buffer.from(signature, <span class="text-emerald-300">'hex'</span>)
+);
+
+<span class="text-purple-400">if</span> (!isValid) <span class="text-purple-400">throw new</span> <span class="text-rose-400">UnauthorizedException</span>();</pre>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Project 3: Production NestJS Platform on GCP -->
+        <div class="glass-card rounded-3xl p-8 lg:p-10 border border-slate-800 transition hover:border-slate-700">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7 space-y-5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">Google Kubernetes Engine (GKE)</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">Terraform (IaC)</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Prometheus RED Method</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-slate-800 text-slate-300">Docker Multi-Stage</span>
+              </div>
+
+              <h3 class="font-heading font-bold text-2xl sm:text-3xl text-white">Production NestJS Platform on GCP</h3>
+
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Enterprise cloud platform provisioned on <strong>Google Cloud Platform (GCP)</strong> using <strong>Terraform</strong> and orchestrated on <strong>GKE</strong>. Automated via a zero-trust GitHub Actions pipeline utilizing <strong>Workload Identity Federation</strong> (keyless OIDC authentication), multi-stage Docker optimization (800MB → 190MB), and comprehensive Prometheus/Grafana RED method dashboards.
+              </p>
+
+              <div class="space-y-2 text-xs text-slate-400 font-sans">
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Infrastructure as Code:</strong> Terraform declarations for custom VPC, subnetworks, regional GKE cluster, and isolated node pools.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Keyless Zero-Trust CI/CD:</strong> Short-lived OIDC tokens eliminating static service account JSON keys.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>RED Method Observability:</strong> Real-time Rate, Errors, and Duration metrics with histogram latency buckets and Kubernetes ServiceMonitor.</span>
+                </div>
+                <div class="flex items-start space-x-2">
+                  <span class="text-emerald-400 font-bold">✓</span>
+                  <span><strong>Automated Autoscaling:</strong> Horizontal Pod Autoscaler (HPA) scaling pods dynamically based on CPU/Memory load.</span>
+                </div>
+              </div>
+
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <a href="https://github.com/kuhaad-dev/nestjs-platform" target="_blank" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs shadow-lg shadow-brand-500/20 flex items-center space-x-2 transition">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span>View on GitHub</span>
+                </a>
+                <span class="text-xs font-mono text-slate-500">Terraform & K8s Manifests</span>
+              </div>
+            </div>
+
+            <!-- Code/Terminal Preview -->
+            <div class="lg:col-span-5 code-editor rounded-2xl p-5 font-mono text-xs text-slate-300 shadow-2xl">
+              <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-[11px] text-slate-500">
+                <span>deploy.yml (GitHub Actions)</span>
+                <span class="text-purple-400">OIDC KEYLESS</span>
+              </div>
+              <pre class="overflow-x-auto text-[11px] leading-relaxed"><span class="text-purple-400">- name:</span> Authenticate to GCP
+  <span class="text-purple-400">uses:</span> google-github-actions/auth@v2
+  <span class="text-purple-400">with:</span>
+    <span class="text-cyan-400">workload_identity_provider:</span> ${{ secrets.WIP }}
+    <span class="text-cyan-400">service_account:</span> ${{ secrets.SA }}
+
+<span class="text-slate-500"># Rolling update with health-check gate</span>
+<span class="text-purple-400">- name:</span> Rollout Status
+  <span class="text-purple-400">run:</span> kubectl rollout status deployment/nest-app</pre>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Professional Experience -->
+  <section id="experience" class="py-20 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-14">
+        <span class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold">Career History</span>
+        <h2 class="font-heading font-bold text-3xl sm:text-4xl text-white mt-2">Professional Experience</h2>
+        <p class="text-slate-400 text-sm mt-3">Track record of building scalable, reliable backend systems across fast-paced environments.</p>
+      </div>
+
+      <div class="relative border-l border-slate-800 ml-4 md:ml-6 space-y-12">
+        
+        <!-- Job 1 -->
+        <div class="relative pl-8 md:pl-10 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-500 border-4 border-[#070a12] group-hover:scale-125 transition"></span>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-heading font-bold text-lg text-white">Backend Software Engineer</h3>
+              <span class="text-xs font-mono text-brand-400 bg-brand-500/10 px-2.5 py-1 rounded border border-brand-500/20">Apr 2026 – Present</span>
+            </div>
+            <div class="text-sm font-medium text-slate-400 mt-0.5">Almonds.ai (Noida)</div>
+            <ul class="mt-4 space-y-2 text-xs text-slate-300 list-disc list-outside pl-4 leading-relaxed">
+              <li>Architected multi-tenant workflow engine managing document verification lifecycles with strict transition guards and pessimistic row locking in MySQL/TypeORM.</li>
+              <li>Built idempotent data processing pipeline validating and upserting 15,000+ hierarchical records from tabular sources.</li>
+              <li>Developed cron-driven SLA engine automatically routing and escalating stalled verification requests across jurisdictional tiers.</li>
+              <li>Executed zero-downtime database migration of 20,000+ legacy records with transactional safety predicates.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="relative pl-8 md:pl-10 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-[#070a12] group-hover:bg-brand-400 transition"></span>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-heading font-bold text-lg text-white">Associate Manager / Backend Engineer</h3>
+              <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Jan 2025 – Apr 2026</span>
+            </div>
+            <div class="text-sm font-medium text-slate-400 mt-0.5">Maxlence Consulting (Gurugram)</div>
+            <ul class="mt-4 space-y-2 text-xs text-slate-300 list-disc list-outside pl-4 leading-relaxed">
+              <li>Directed backend engineering for production eCommerce platform serving 50,000+ orders using Express, MySQL, and Sequelize in Docker containers.</li>
+              <li>Integrated Stripe payment infrastructure with webhook signature verification and idempotent processing.</li>
+              <li>Designed multi-tier Redis caching reducing database query volume by 60%+ and maintaining sub-100ms response times.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="relative pl-8 md:pl-10 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-[#070a12] group-hover:bg-brand-400 transition"></span>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-heading font-bold text-lg text-white">Backend Engineer (Contract)</h3>
+              <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Aug 2024 – Dec 2024</span>
+            </div>
+            <div class="text-sm font-medium text-slate-400 mt-0.5">HRPower24 (Rorschacherberg, Switzerland - Remote)</div>
+            <ul class="mt-4 space-y-2 text-xs text-slate-300 list-disc list-outside pl-4 leading-relaxed">
+              <li>Engineered backend microservices and Firestore schemas for an automated talent discovery platform using Node.js.</li>
+              <li>Designed asynchronous pipelines for candidate parsing and dynamic job profile matching.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 4 -->
+        <div class="relative pl-8 md:pl-10 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-[#070a12] group-hover:bg-brand-400 transition"></span>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-heading font-bold text-lg text-white">Backend Developer</h3>
+              <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Mar 2024 – Jul 2024</span>
+            </div>
+            <div class="text-sm font-medium text-slate-400 mt-0.5">Search My Expert (Delhi)</div>
+            <ul class="mt-4 space-y-2 text-xs text-slate-300 list-disc list-outside pl-4 leading-relaxed">
+              <li>Built event-driven bidirectional communication engine using Socket.IO and Redis Pub/Sub supporting 5,000+ concurrent connections.</li>
+              <li>Engineered NestJS endpoints with PostgreSQL on AWS EC2; achieved 80%+ Jest test coverage.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 5 -->
+        <div class="relative pl-8 md:pl-10 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-[#070a12] group-hover:bg-brand-400 transition"></span>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="font-heading font-bold text-lg text-white">Software Developer</h3>
+              <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded">Mar 2023 – Mar 2024</span>
+            </div>
+            <div class="text-sm font-medium text-slate-400 mt-0.5">MobiOffice Software Innovations (Surat)</div>
+            <ul class="mt-4 space-y-2 text-xs text-slate-300 list-disc list-outside pl-4 leading-relaxed">
+              <li>Developed core administration APIs using NestJS, MySQL, and TypeORM with granular RBAC, cutting processing errors by 30%.</li>
+              <li>Optimized query paths with composite indexes for 25% faster endpoint execution.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Technical Skills Grid -->
+  <section id="skills" class="py-20 border-t border-slate-800/80 bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-12">
+        <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">Technical Arsenal</span>
+        <h2 class="font-heading font-bold text-3xl sm:text-4xl text-white mt-2">Skills & Technologies</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Category 1 -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-heading font-bold text-sm text-white uppercase tracking-wider mb-4 text-brand-400">Languages & Core</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">TypeScript</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">JavaScript (ES6+)</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Node.js</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">NestJS</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Express.js</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">SQL</span>
+          </div>
+        </div>
+
+        <!-- Category 2 -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-heading font-bold text-sm text-white uppercase tracking-wider mb-4 text-cyan-400">Databases & Caching</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">PostgreSQL</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">MySQL</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Redis (Pub/Sub)</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Distributed Locks</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">TypeORM</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Sequelize</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Prisma</span>
+          </div>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-heading font-bold text-sm text-white uppercase tracking-wider mb-4 text-emerald-400">DevOps & Cloud</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Docker</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Kubernetes (GKE)</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">GCP</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">AWS (EC2/S3)</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Terraform</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">GitHub Actions</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Prometheus</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Grafana</span>
+          </div>
+        </div>
+
+        <!-- Category 4 -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-heading font-bold text-sm text-white uppercase tracking-wider mb-4 text-purple-400">Architecture & Messaging</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Workflow Engines (FSM)</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Pessimistic Locking</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Socket.IO</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">BullMQ</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">HMAC-SHA256</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">RBAC / ABAC</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">Jest Testing</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Education Section -->
+      <div class="mt-12 glass-card rounded-2xl p-6 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Education</span>
+          <div class="font-heading font-bold text-base text-white mt-1">B.Sc. (Hons) Physics — Ramjas College, University of Delhi (2014 – 2017)</div>
+          <div class="text-xs text-slate-400 mt-0.5">Full Stack Software Engineering Specialization — The 10X Academy (2022)</div>
+        </div>
+        <div class="text-xs font-mono text-slate-500">
+          Delhi NCR, India
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact & Footer Section -->
+  <footer id="contact" class="py-20 border-t border-slate-800/80 bg-[#05080f]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold">Let's Connect</span>
+          <h2 class="font-heading font-bold text-3xl sm:text-5xl text-white mt-2">Ready to build scalable systems together?</h2>
+          <p class="text-slate-400 text-sm mt-4 leading-relaxed max-w-md">
+            Available for full-time worldwide remote backend roles, contractor opportunities (Deel/B2B), and high-concurrency API initiatives.
+          </p>
+
+          <div class="mt-8 space-y-3 font-mono text-xs text-slate-300">
+            <div class="flex items-center space-x-3">
+              <span class="text-slate-500">Email:</span>
+              <a href="mailto:mayankkuhaad@gmail.com" class="text-cyan-400 hover:underline">mayankkuhaad@gmail.com</a>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="text-slate-500">Phone:</span>
+              <span>+91 70372 64321</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="text-slate-500">Location:</span>
+              <span>Delhi NCR, India (IST / Remote Global)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 border border-slate-800 space-y-5">
+          <h3 class="font-heading font-bold text-lg text-white">Quick Actions</h3>
+          
+          <a href="mailto:mayankkuhaad@gmail.com?subject=Backend%20Engineering%20Opportunity" class="w-full py-3 px-5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs shadow-lg shadow-brand-500/20 active:scale-[0.99] transition flex items-center justify-center space-x-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span>Send an Email</span>
+          </a>
+
+          <a href="https://linkedin.com/in/mayank-kuhaad" target="_blank" class="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-medium text-xs active:scale-[0.99] transition flex items-center justify-center space-x-2">
+            <svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.738-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>Connect on LinkedIn</span>
+          </a>
+
+          <a href="https://github.com/kuhaad-dev" target="_blank" class="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-medium text-xs active:scale-[0.99] transition flex items-center justify-center space-x-2">
+            <svg class="w-4 h-4 text-slate-300" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <span>Explore Code on GitHub</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-slate-900 text-center text-xs font-mono text-slate-600">
+        © 2026 Mayank Kuhaad. Engineered for distributed resilience and high concurrency.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Notification Element -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out bg-slate-900/95 backdrop-blur-md border border-slate-700 text-slate-200 px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 text-xs font-mono">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toast-msg">Email copied to clipboard!</span>
+  </div>
+
+  <script>
+    // Mobile navigation toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      // Close on link click
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    }
+
+    // Toast helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-msg');
+      if (!toast || !msg) return;
+      msg.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }
+
+    // Auto copy on clicking email text
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+      link.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText('mayankkuhaad@gmail.com').then(() => {
+          showToast('Copied email: mayankkuhaad@gmail.com');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
